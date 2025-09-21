@@ -6,6 +6,7 @@ import { AppContext } from '../context/AppContext.jsx'
 const Navbar = () => {
     const {user} = useContext(AppContext);
     const navigate = useNavigate();
+     const {setShowLogin} = useContext(AppContext);
     return (
         <div className='flex items-center justify-between mt-2'>
             <Link to={'/'}>
@@ -31,7 +32,7 @@ const Navbar = () => {
                     :
                     <div className='flex items-center gap-2 sm:gap-5'>
                         <p onClick={() => navigate('/buy')} className='cursor-pointer '>Pricing</p>
-                        <p className='bg-zinc-800 text-white px-7 py-2 sm:px-10 text-sm rounded-full'>Login</p>
+                        <p className='bg-zinc-800 text-white px-7 py-2 sm:px-10 text-sm rounded-full' onClick={()=>{setShowLogin(true)}}>Login</p>
                     </div>
                 }
             </div>

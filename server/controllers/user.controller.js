@@ -71,3 +71,24 @@ export const loginUser = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
+export const userCredits = async(req,res)=>{
+  try{
+    
+    const userId = req.userId || req.body.userId;
+    if(!userId){
+      return res.status(400).json({success:false,message:"Missing user id"});
+    }
+    const user= await userModel.findById(userId);
+    if(!user){
+      return res.status(404).json({success:false,message:"User not found"});
+    }
+    res.status(200).json({success:true,credits:user.creditBalance,user:{name:user.name}})
+  }
+  catch(error)
+  {
+    console.log("error in userCredits",error.message);
+    res.status(500).json({message:"internal server error"})
+
+  }
+}
